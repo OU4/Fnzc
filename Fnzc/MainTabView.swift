@@ -9,12 +9,24 @@ import SwiftUI
 struct MainTabView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @StateObject private var profileViewModel = ProfileViewModel()
+    @StateObject private var feedViewModel = FeedViewModel()
     
     var body: some View {
         TabView {
-            Text("Home")
+            FeedView()
+                .environmentObject(feedViewModel)
                 .tabItem {
-                    Label("Home", systemImage: "house")
+                    Label("Feed", systemImage: "list.bullet")
+                }
+            
+            Text("Explore")
+                .tabItem {
+                    Label("Explore", systemImage: "magnifyingglass")
+                }
+            
+            Text("Check In")
+                .tabItem {
+                    Label("Check In", systemImage: "plus.circle.fill")
                 }
             
             ProfileView(viewModel: profileViewModel)

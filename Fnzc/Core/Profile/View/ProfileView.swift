@@ -30,46 +30,46 @@ struct ProfileView: View {
                 
                 // Profile Header
                 VStack {
-                                    if let profilePictureURL = viewModel.user?.profileImageUrl,
-                                       let url = URL(string: profilePictureURL) {
-                                        WebImage(url: url)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 80, height: 80)
-                                            .clipShape(Circle())
-                                    } else {
-                                        ZStack {
-                                            Circle()
-                                                .fill(Color.orange)
-                                                .frame(width: 80, height: 80)
-                                            Text(String(viewModel.user?.fullname.prefix(1) ?? ""))
-                                                .font(.title)
-                                                .foregroundColor(.white)
-                                        }
-                                    }
-                                    
-                                    Text(viewModel.user?.fullname ?? "")
-                                        .font(.title2)
-                                    Text(viewModel.user?.bio ?? "")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                    
-                                    HStack {
-                                        Image(systemName: "mappin.circle.fill")
-                                        Text(viewModel.user?.location ?? "Location not set")
-                                    }
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                                    
-                                    Button("Edit") {
-                                        showingEditProfile = true
-                                    }
-                                    .font(.caption)
-                                    .foregroundColor(.blue)
-                                    .sheet(isPresented: $showingEditProfile) {
-                                        EditProfileView(viewModel: viewModel)
-                                    }
-                                }
+                    if let profilePictureURL = viewModel.user?.profileImageUrl,
+                       let url = URL(string: profilePictureURL) {
+                        WebImage(url: url)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 80, height: 80)
+                            .clipShape(Circle())
+                    } else {
+                        ZStack {
+                            Circle()
+                                .fill(Color.orange)
+                                .frame(width: 80, height: 80)
+                            Text(String(viewModel.user?.fullname.prefix(1) ?? ""))
+                                .font(.title)
+                                .foregroundColor(.white)
+                        }
+                    }
+                    
+                    Text(viewModel.user?.fullname ?? "")
+                        .font(.title2)
+                    Text(viewModel.user?.bio ?? "")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    
+                    HStack {
+                        Image(systemName: "mappin.circle.fill")
+                        Text(viewModel.user?.location ?? "Location not set")
+                    }
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    
+                    Button("Edit") {
+                        showingEditProfile = true
+                    }
+                    .font(.caption)
+                    .foregroundColor(.blue)
+                    .sheet(isPresented: $showingEditProfile) {
+                        EditProfileView(viewModel: viewModel)
+                    }
+                }
                 
                 // Stats Grid
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
@@ -113,27 +113,5 @@ struct ProfileView: View {
         }) {
             Image(systemName: "gearshape")
         })
-    }
-}
-
-// Add the StatView struct here
-struct StatView: View {
-    let title: String
-    let value: String
-    let color: Color
-    
-    var body: some View {
-        VStack {
-            Text(value)
-                .font(.title2)
-                .fontWeight(.bold)
-            Text(title)
-                .font(.caption)
-                .foregroundColor(.gray)
-        }
-        .frame(maxWidth: .infinity)
-        .padding()
-        .background(color.opacity(0.1))
-        .cornerRadius(10)
     }
 }

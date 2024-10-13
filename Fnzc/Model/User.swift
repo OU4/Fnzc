@@ -37,6 +37,8 @@ struct User: Identifiable, Codable {
         self.location = ""
     }
     
+    
+    
     init(id: String, email: String, username: String, fullname: String, profileImageUrl: String? = nil, bio: String = "", location: String = "") {
         self.id = id
         self.email = email
